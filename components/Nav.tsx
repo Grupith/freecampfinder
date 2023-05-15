@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import Image from "next/image"
 import tentIcon from "../public/assets/camping-tent.png"
 import accountImg from "../public/assets/GoogleAvatar.png"
+import googleSignIn from "../public/assets/btn_google_light_normal_ios.png"
 
 export default function Nav() {
   const [userMenuToggle, setUserMenuToggle] = useState(false)
@@ -19,11 +20,15 @@ export default function Nav() {
         </div>
       </Link>
       <div className="flex space-x-3">
-        <button className="border border-black py-1 px-3 rounded-md font-semibold text-md shadow-lg">
-          Sign In
-        </button>
-        <div className="relative" onClick={handleUserMenu}>
-          <button>
+        <Image
+          src={googleSignIn}
+          alt="sign in with google"
+          className="cursor-pointer"
+          width={40}
+          height={40}
+        />
+        <div className="relative flex" onClick={handleUserMenu}>
+          <button className="">
             <span className="sr-only">User Menu</span>
             <Image
               src={accountImg}
@@ -34,7 +39,7 @@ export default function Nav() {
             />
           </button>
           {userMenuToggle && (
-            <ul className="absolute right-0 z-10 mt-2 p-3 w-48 bg-white rounded-md shadow-lg flex flex-col space-y-2 font-medium">
+            <ul className="absolute right-0 z-10 mt-14 p-3 w-48 bg-white rounded-md shadow-lg flex flex-col space-y-2 font-medium">
               <Link
                 href="/createpost"
                 className="border p-1 rounded-md text-center"

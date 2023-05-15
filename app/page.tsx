@@ -5,11 +5,11 @@ export default function Home() {
   return (
     <main className="text-center pt-16 min-h-screen font-sans bg-gray-100">
       <section>
-        <div className="pt-6">
+        <div className="pt-10">
           <h1 className="text-3xl font-bold mx-10">
             Discover <span></span>Free Campsites Near You!
           </h1>
-          <p className="mt-4 text-sm font-medium mx-10">
+          <p className="mt-4 text-sm font-medium mx-14">
             Search, Review and Share your Favorite Campsites with Fellow Outdoor
             Enthusiasts! Sign-in with Google to Submit a Campsite.
           </p>
