@@ -19,7 +19,7 @@ export default function Nav() {
         </div>
       </Link>
       <div className="flex space-x-3">
-        <button className="border border-black py-1 px-3 rounded-md font-semibold text-md">
+        <button className="border border-black py-1 px-3 rounded-md font-semibold text-md shadow-lg">
           Sign In
         </button>
         <div className="relative" onClick={handleUserMenu}>
