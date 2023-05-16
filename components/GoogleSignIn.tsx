@@ -36,7 +36,7 @@ const GoogleSignIn: React.FC<GoogleSignInProps> = ({
     if (user) {
       router.push("/dashboard")
     }
-  }, [user])
+  }, [user, router])
 
   return (
     <div onClick={handleSignIn}>
