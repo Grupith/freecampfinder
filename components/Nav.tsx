@@ -4,12 +4,31 @@ import React, { useState } from "react"
 import Image from "next/image"
 import tentIcon from "../public/assets/camping-tent.png"
 import accountImg from "../public/assets/GoogleAvatar.png"
-import googleSignIn from "../public/assets/btn_google_light_normal_ios.png"
+import GoogleSignIn from "./GoogleSignIn"
+import { getAuth, signOut } from "firebase/auth"
+import { useRouter } from "next/navigation"
 
 export default function Nav() {
+  const auth = getAuth()
+  const router = useRouter()
   const [userMenuToggle, setUserMenuToggle] = useState(false)
   const handleUserMenu = () => {
     setUserMenuToggle((prev) => !prev)
+  }
+  const handleSignOut = () => {
+    try {
+      signOut(auth)
+      router.push("/")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const onSuccess = () => {
+    console.log("Sign in success")
+  }
+
+  const onFailure = (error: any) => {
+    console.log("Sign in error", error)
   }
   return (
     <div className="bg-white py-3 px-6 flex justify-between items-center fixed top-0 w-full z-50">
@@ -20,13 +39,7 @@ export default function Nav() {
         </div>
       </Link>
       <div className="flex space-x-3">
-        <Image
-          src={googleSignIn}
-          alt="sign in with google"
-          className="cursor-pointer"
-          width={40}
-          height={40}
-        />
+        <GoogleSignIn onSuccess={onSuccess} onFailure={onFailure} />
         <div className="relative flex" onClick={handleUserMenu}>
           <button className="">
             <span className="sr-only">User Menu</span>
@@ -61,6 +74,12 @@ export default function Nav() {
               <Link href="/faq" className="border p-1 rounded-md text-center">
                 FAQ
               </Link>
+              <p
+                className="border p-1 rounded-md text-center cursor-pointer"
+                onClick={handleSignOut}
+              >
+                Logout
+              </p>
             </ul>
           )}
         </div>

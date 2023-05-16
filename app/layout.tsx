@@ -1,6 +1,7 @@
 import Nav from "@/components/Nav"
 import "./globals.css"
 import { Inter } from "next/font/google"
+import { UserProvider } from "./UserContext"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -20,8 +21,10 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/assets/favicon.png" />
       </head>
       <body>
-        <Nav />
-        <div className={inter.className}>{children}</div>
+        <UserProvider>
+          <Nav />
+          <div className={inter.className}>{children}</div>
+        </UserProvider>
       </body>
     </html>
   )
