@@ -15,7 +15,6 @@ export default function Home() {
           (position) => {
             const { latitude, longitude } = position.coords
             setMapCenter({ lat: latitude, lng: longitude })
-            console.log(mapCenter)
           },
           (error) => {
             console.error("Error retrieving user location:", error)
