@@ -1,8 +1,9 @@
 "use client"
 import React from "react"
 import { useAuth } from "../UserContext"
+import withAuth from "../withAuth"
 
-export default function Account() {
+function Account() {
   const { user } = useAuth()
 
   return (
@@ -15,3 +16,5 @@ export default function Account() {
     </div>
   )
 }
+
+export default withAuth(Account)
