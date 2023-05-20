@@ -17,6 +17,7 @@ export default function Home() {
         <Image
           src={campsiteImg}
           alt="3D image of campsite"
+          priority={true}
           width={275}
           height={275}
           className="rounded-3xl m-auto"

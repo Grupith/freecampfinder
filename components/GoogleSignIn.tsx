@@ -39,15 +39,19 @@ const GoogleSignIn: React.FC<GoogleSignInProps> = ({
   }, [user, router])
 
   return (
-    <div onClick={handleSignIn}>
-      <Image
-        src={googleSignIn}
-        alt="sign in with google"
-        className="cursor-pointer"
-        width={40}
-        height={40}
-      />
-    </div>
+    <>
+      {!user && (
+        <div onClick={handleSignIn}>
+          <Image
+            src={googleSignIn}
+            alt="sign in with google"
+            className="cursor-pointer"
+            width={40}
+            height={40}
+          />
+        </div>
+      )}
+    </>
   )
 }
 

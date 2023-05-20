@@ -32,7 +32,7 @@ export const UserProvider = ({ children }: any) => {
 
   return (
     <UserContext.Provider value={{ user, loading }}>
-      {children}
+      {!loading && children}
     </UserContext.Provider>
   )
 }
