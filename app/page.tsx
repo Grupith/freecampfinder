@@ -1,7 +1,33 @@
-import Image from "next/image"
-import campsiteImg from "../public/assets/Campsite-transparent.png"
+"use client"
+import Map from "@/components/Map"
+import { useEffect, useState } from "react"
 
 export default function Home() {
+  const [mapCenter, setMapCenter] = useState<{ lat: number; lng: number }>({
+    lat: 0,
+    lng: 0,
+  })
+  // Ask the user for location permission on the browser
+  useEffect(() => {
+    const fetchUserLocation = () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords
+            setMapCenter({ lat: latitude, lng: longitude })
+            console.log(mapCenter)
+          },
+          (error) => {
+            console.error("Error retrieving user location:", error)
+          }
+        )
+      } else {
+        console.warn("Geolocation is not supported by this browser.")
+      }
+    }
+
+    fetchUserLocation()
+  }, [])
   return (
     <main className="text-center pt-16 min-h-screen font-sans bg-gray-100">
       <section>
@@ -14,15 +40,10 @@ export default function Home() {
             Enthusiasts! Sign-in with Google to Submit a Campsite.
           </p>
         </div>
-        <Image
-          src={campsiteImg}
-          alt="3D image of campsite"
-          priority={true}
-          width={275}
-          height={275}
-          className="rounded-3xl m-auto"
-        />
       </section>
+      <div className="flex justify-center my-10 w-fit m-auto">
+        <Map center={mapCenter} />
+      </div>
       <form className="flex flex-col mx-10">
         <input
           type="text"
