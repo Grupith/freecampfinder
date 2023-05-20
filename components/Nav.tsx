@@ -3,14 +3,16 @@ import Link from "next/link"
 import React, { useState } from "react"
 import Image from "next/image"
 import tentIcon from "../public/assets/camping-tent.png"
-import accountImg from "../public/assets/GoogleAvatar.png"
+import defaultProfileImg from "../public/assets/GoogleAvatar.png"
 import GoogleSignIn from "./GoogleSignIn"
 import { getAuth, signOut } from "firebase/auth"
 import { useRouter } from "next/navigation"
+import { useAuth } from "@/app/UserContext"
 
 export default function Nav() {
   const auth = getAuth()
   const router = useRouter()
+  const { user } = useAuth()
   const [userMenuToggle, setUserMenuToggle] = useState(false)
   const handleUserMenu = () => {
     setUserMenuToggle((prev) => !prev)
@@ -41,15 +43,25 @@ export default function Nav() {
       <div className="flex space-x-3">
         <GoogleSignIn onSuccess={onSuccess} onFailure={onFailure} />
         <div className="relative flex" onClick={handleUserMenu}>
-          <button className="">
+          <button className="cursor-pointer">
             <span className="sr-only">User Menu</span>
-            <Image
-              src={accountImg}
-              alt="Google Profile Image"
-              width={35}
-              height={35}
-              className="cursor-pointer"
-            />
+            {user ? (
+              <Image
+                src={user.photoURL}
+                alt="Google Profile Image"
+                width={38}
+                height={38}
+                className="rounded-3xl"
+              />
+            ) : (
+              <Image
+                src={defaultProfileImg}
+                alt="Google Profile Image"
+                width={35}
+                height={35}
+                className=""
+              />
+            )}
           </button>
           {userMenuToggle && (
             <ul className="absolute right-0 z-10 mt-14 p-3 w-48 bg-white rounded-md shadow-lg flex flex-col space-y-2 font-medium">
