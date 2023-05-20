@@ -27,7 +27,7 @@ export default function Home() {
     }
 
     fetchUserLocation()
-  }, [])
+  }, [mapCenter])
   return (
     <main className="text-center pt-16 min-h-screen font-sans bg-gray-100">
       <section>
@@ -44,7 +44,7 @@ export default function Home() {
       <div className="flex justify-center my-10 w-fit m-auto">
         <Map center={mapCenter} />
       </div>
-      <form className="flex flex-col mx-10">
+      {/* <form className="flex flex-col mx-10">
         <input
           type="text"
           placeholder="Enter location..."
@@ -56,7 +56,7 @@ export default function Home() {
         >
           Search
         </button>
-      </form>
+      </form> */}
     </main>
   )
 }
