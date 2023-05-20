@@ -6,6 +6,8 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
 import app from "../app/Firebase"
 import { useAuth } from "@/app/UserContext"
 import { useRouter } from "next/navigation"
+import { db } from "../app/Firebase"
+import { collection, doc, setDoc, getDoc } from "firebase/firestore"
 
 interface GoogleSignInProps {
   onSuccess: () => void
@@ -34,8 +36,34 @@ const GoogleSignIn: React.FC<GoogleSignInProps> = ({
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard")
-      console.log(user)
+      const usersCollection = collection(db, "users")
+      const userDocRef = doc(usersCollection, user.uid)
+
+      const addUserDocument = async () => {
+        const docSnapshot = await getDoc(userDocRef)
+
+        // check if user exists in users collection
+        if (docSnapshot.exists()) {
+          console.log("User document already exists for UID:", user.uid)
+          router.push("/dashboard")
+          return
+        }
+        // Create User Data
+        const newUser = {
+          name: user.displayName,
+          email: user.email,
+        }
+
+        try {
+          await setDoc(doc(usersCollection, user.uid), newUser)
+          router.push("/dashboard")
+          console.log("User Document added with ID:", user.uid)
+        } catch (error) {
+          console.log("[ERROR] adding user document", error)
+        }
+      }
+
+      addUserDocument()
     }
   }, [user, router])
 

@@ -21,6 +21,7 @@ export default function Nav() {
     try {
       signOut(auth)
       router.push("/")
+      console.log("User signed out successfully")
     } catch (error) {
       console.log(error)
     }
