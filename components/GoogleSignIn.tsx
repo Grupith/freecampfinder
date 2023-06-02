@@ -2,7 +2,7 @@
 import Image from "next/image"
 import React, { useEffect } from "react"
 import googleSignIn from "../public/assets/btn_google_light_normal_ios.png"
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
+import { getAuth, GoogleAuthProvider, signInWithRedirect } from "firebase/auth"
 import app from "../app/Firebase"
 import { useAuth } from "@/app/UserContext"
 import { useRouter } from "next/navigation"
@@ -25,7 +25,7 @@ const GoogleSignIn: React.FC<GoogleSignInProps> = ({
 
   const handleSignIn = async () => {
     try {
-      const result = await signInWithPopup(auth, provider)
+      const result = await signInWithRedirect(auth, provider)
       onSuccess()
     } catch (error) {
       if (typeof onFailure === "function") {

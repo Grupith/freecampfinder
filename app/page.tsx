@@ -40,7 +40,7 @@ export default function Home() {
           </p>
         </div>
       </section>
-      <div className="flex justify-center my-10 w-fit m-auto">
+      <div className="flex justify-center my-10 w-fit m-auto transition-none">
         <Map center={mapCenter} />
       </div>
       {/* <form className="flex flex-col mx-10">
